@@ -1,0 +1,51 @@
+<html lang="en-US" class="fa-events-icons-ready">
+
+<head>
+	<script type="text/javascript"></script>
+	<meta charset="UTF-8">
+	<meta property="og:description" content="Hi">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- This is the bootstrap link below -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+          <h1>Mission to Mars</h1>
+          <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+        <h2>Latest Mars News</h2>
+        <h3>{{ mars.title }}</h3>
+        <h3>{{ mars.paragraph }}</h3>
+
+        <h2>Featured Mars News</h2>
+        <img src="{{ vacation.sloth_img }}" alt="Sloth">
+
+        <h2>Current Weater on Mars</h2>
+        <h3>Max Temp: {{ vacation.max_temp }}</h3>
+        <h3>Min Temp: {{ vacation.min_temp }}</h3>
+
+        <h2>Mars Facts</h2>
+        <h3>Max Temp: {{ vacation.max_temp }}</h3>
+        <h3>Min Temp: {{ vacation.min_temp }}</h3>
+
+      </div>
+      </div>
+        
+    
+    <!-- This is the JS from Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
