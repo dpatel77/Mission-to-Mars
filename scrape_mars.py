@@ -10,6 +10,8 @@ def init_browser():
     executable_path = {"executable_path": "chromedriver.exe"}
     return Browser("chrome", **executable_path, headless=False)
 
+data={}
+data
 
 def scrape_info():
     # Browser = init_browser()
@@ -40,17 +42,26 @@ def scrape_info():
             # Print results only if title, price, and link are available
             if (title and paragraph):
                 print('-------------')
-                print(title)
-                print(paragraph)
+                # print(title)
+                # print(paragraph)
         except AttributeError as e:
             print(e)
 
     # Close the browser after scraping
     # browser.quit()
+    data['title'] = headlines[0]['title']
+    data['paragraph'] = headlines[0]['paragraph']
+    # data['featured_image_url'] = featured()
+    # data['mars_weather'] = mars_tweet()
+    # data['mars_html'] = mars_html()
+    # data['hemisphere_image_urls'] = mars_hemi()
+    print(data)
 
-    return headlines[0]
+    return data
 
-def featured():
+
+
+def feature():
     browser = init_browser()
     # executable_path = {'executable_path': 'chromedriver.exe'}
     # browser = Browser('chrome', **executable_path, headless=True)
@@ -65,9 +76,11 @@ def featured():
     a = slides.find('a')
     href = a['data-fancybox-href']
     featured_image_url = 'https://www.jpl.nasa.gov' + href
-    featured_image_url
+
+    print(featured_image_url)
 
     return featured_image_url
+
 
 def mars_tweet():
     # browser = init_browser()
@@ -77,15 +90,16 @@ def mars_tweet():
 
     result = soup.find('div', class_="js-tweet-text-container")
     tweet = result.find('p', class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text").text
-    mars_weather = tweet
-    mars_weather
 
-    return mars_weather
+    print(tweet)
+
+    return tweet
 
 def mars_html():
     # browser = init_browser()
     mars_html = pd.read_html("https://space-facts.com/mars/")[2].to_html()
-    mars_html
+
+    print(mars_html)
 
     return mars_html
 
@@ -114,9 +128,9 @@ def mars_hemi():
         link = item.find('a')
         href = link['href']
         titles = item.find('h3').text
-        print(titles)
+        # print(titles)
         urls = 'https://astrogeology.usgs.gov' + href
-        print(urls)
+        # print(urls)
 
         try:
             browser.visit(urls)
@@ -128,10 +142,13 @@ def mars_hemi():
             for soup in soups:
                 # Use Beautiful Soup's find() method to navigate and retrieve attributes
                 link = soup.find('a')['href']
-                print(link)
+                # print(link)
                 hemisphere_image_urls.append({"title": titles, "img_url": urls,"imglink": link})
         except:
             print("Scraping skipped")
 
 
+    print(hemisphere_image_urls)
+
     return hemisphere_image_urls
+

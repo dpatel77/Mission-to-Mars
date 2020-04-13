@@ -14,33 +14,60 @@ mongo = PyMongo(app)
 # Route to render index.html template using data from Mongo
 @app.route("/")
 def index():
+
     mars_headlines = mongo.db.mars_headlines
     # Run the scrape function
     mars_headlines_data = scrape_mars.scrape_info()
+    mars_tweet = scrape_mars.mars_tweet()
+    mars_html = scrape_mars.mars_html()
+    
+    #feature() doesn't work
+    # mars_feature_image = scrape_mars.feature()
+
 
     # # Update the Mongo database using update and upsert=True
     mars_headlines.update({}, mars_headlines_data, upsert=True)
+    mars_headlines.update({}, mars_tweet, upsert=True)
+    mars_headlines.update({}, mars_html, upsert=True)
 
+    data = {
+        "mars_tweet": mars_tweet,
+        "mars_headlines_data": mars_headlines_data,
+        # "mars_feature_image": mars_feature_image,
+        "mars_html": mars_html,
+    }
+
+    # print(data)
     # # Find one record of data from the mongo database
-    headlines = mongo.db.mars_headlines.find_one()
+    # headlines = mongo.db.mars_headlines.find_one()
 
+    # Featured Image Url
+    # featured_image = scrape_mars.featured()
+    # print("FROM APP.PY",headlines)
     # Return template and data
-    return render_template("index.html",headlines=headlines)
+    return render_template("index.html",data=data)
 
 
-# Route that will trigger the scrape function
-@app.route("/scrape")
-def mars_hemi():
+# @app.route("/")
+# def get_html():
+#     mars_html = scrape_mars.mars_html()
+#     print(mars_html)
+#     return render_template("index.html",mars_html=mars_html)
 
-    # Run the scrape function
-    hemispheres = scrape_mars.mars_hemi()
 
-    # Update the Mongo database using update and upsert=True
-    # mongo.db.mars.update({}, mars_data, upsert=True)
+# # Route that will trigger the scrape function
+# @app.route("/scrape")
+# def mars_hemi():
 
-    return render_template("index.html",hemispheres=hemispheres)
-    # Redirect back to home page
-    # return redirect("/")
+#     # Run the scrape function
+#     hemispheres = scrape_mars.mars_hemi()
+
+#     # Update the Mongo database using update and upsert=True
+#     # mongo.db.mars.update({}, mars_data, upsert=True)
+
+#     return render_template("index.html",hemispheres=hemispheres)
+#     # Redirect back to home page
+#     # return redirect("/")
 
 
 if __name__ == "__main__":
