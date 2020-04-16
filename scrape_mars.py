@@ -13,6 +13,8 @@ def init_browser():
 data={}
 data
 
+
+
 def scrape_info():
     # Browser = init_browser()
 
@@ -61,13 +63,14 @@ def scrape_info():
 
 
 
-def feature():
+def image():
     browser = init_browser()
     # executable_path = {'executable_path': 'chromedriver.exe'}
     # browser = Browser('chrome', **executable_path, headless=True)
 
     url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(url)
+
 
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
@@ -77,7 +80,8 @@ def feature():
     href = a['data-fancybox-href']
     featured_image_url = 'https://www.jpl.nasa.gov' + href
 
-    print(featured_image_url)
+
+    print("Featured Image", featured_image_url)
 
     return featured_image_url
 
@@ -97,9 +101,12 @@ def mars_tweet():
 
 def mars_html():
     # browser = init_browser()
-    mars_html = pd.read_html("https://space-facts.com/mars/")[2].to_html()
+    mars_html = pd.read_html("https://space-facts.com/mars/")[2]
 
-    print(mars_html)
+    mars_html.columns = ['Mars - Earth Comparison', 'Mars','Earth']
+    mars_html.set_index('Mars - Earth Comparison', inplace = True)
+
+    print("Print of html from SCRAPE PY:", mars_html)
 
     return mars_html
 

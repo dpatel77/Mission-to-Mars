@@ -17,11 +17,14 @@
     <h2>Latest Mars News</h2>
     <h4>{{ data.mars_headlines_data.title }}</h4>
     <h4>{{ data.mars_headlines_data.paragraph }}</h4>
+
     <h2>Featured Mars News</h2>
+
     <h2>Current Weater on Mars</h2>
     <h4>{{ data.mars_tweet }}</h4>
+
     <h2>Mars Facts</h2>
-    <h4>{{ data.mars_html }}</h4>
+    {{ data.mars_html| safe }}
   </div>
   <!-- This is the JS from Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

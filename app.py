@@ -22,20 +22,19 @@ def index():
     mars_html = scrape_mars.mars_html()
     
     #feature() doesn't work
-    # mars_feature_image = scrape_mars.feature()
-
-
-    # # Update the Mongo database using update and upsert=True
-    mars_headlines.update({}, mars_headlines_data, upsert=True)
-    mars_headlines.update({}, mars_tweet, upsert=True)
-    mars_headlines.update({}, mars_html, upsert=True)
+    # mars_feature_image = scrape_mars.image()
 
     data = {
         "mars_tweet": mars_tweet,
         "mars_headlines_data": mars_headlines_data,
         # "mars_feature_image": mars_feature_image,
-        "mars_html": mars_html,
+        "mars_html": mars_html
     }
+
+    # # Update the Mongo database using update and upsert=True
+    # mars_headlines.update({}, data, upsert=True)
+    # mars_headlines.update({}, mars_tweet, upsert=True)
+    # mars_headlines.update({}, mars_html, upsert=True)
 
     # print(data)
     # # Find one record of data from the mongo database
@@ -45,6 +44,7 @@ def index():
     # featured_image = scrape_mars.featured()
     # print("FROM APP.PY",headlines)
     # Return template and data
+    print(data)
     return render_template("index.html",data=data)
 
 
