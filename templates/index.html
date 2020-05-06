@@ -17,15 +17,48 @@
     <h2>Latest Mars News</h2>
     <h4>{{ data.mars_headlines_data.title }}</h4>
     <h4>{{ data.mars_headlines_data.paragraph }}</h4>
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Featured Mars News</h2>
+    
+        <img src={{data.mars_feature_image}}>
+      </div>
+      <div class="col-md-4">
+        <h2>Current Weather on Mars</h2>
+        <h4>{{ data.mars_tweet }}</h4>
+    
+        <h2>Mars Facts</h2>
+        {{ data.mars_html| safe }}
+        
+      </div>
+      
+    </div>
+    </div>
+    
+    
 
-    <h2>Featured Mars News</h2>
-
-    <h2>Current Weater on Mars</h2>
-    <h4>{{ data.mars_tweet }}</h4>
-
-    <h2>Mars Facts</h2>
-    {{ data.mars_html| safe }}
+    <div class="row mt-5">
+      <div class="col-md-12">
+        <h2>Mars Hemispheres</h2>
+        <hr>
+        <div class="row">
+          {% for hemi in data.mars_hemi %}
+          <div class="col-sm-6 mb-3">
+            <div class="card">
+              <img src="{{hemi.img_url}}" class="card-img-top" alt="{{hemi.title}}">
+              <div class="card-body">
+                <h4 class="card-title">{{hemi.title}}</h4>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  
   </div>
+
+  
   <!-- This is the JS from Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

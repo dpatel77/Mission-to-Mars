@@ -101,10 +101,14 @@ def mars_tweet():
 
 def mars_html():
     # browser = init_browser()
-    mars_html = pd.read_html("https://space-facts.com/mars/")[2]
+    mars_html = pd.read_html("https://space-facts.com/mars/")[0]
+    mars_html
 
-    mars_html.columns = ['Mars - Earth Comparison', 'Mars','Earth']
-    mars_html.set_index('Mars - Earth Comparison', inplace = True)
+    mars_html.columns = ['Description', 'Value']
+    mars_html['Description'] = mars_html['Description'].str.replace(':', '')
+    mars_html.set_index('Description', inplace = True)
+    mars_html = mars_html.to_html()
+    mars_html
 
     print("Print of html from SCRAPE PY:", mars_html)
 
@@ -132,28 +136,19 @@ def mars_hemi():
     # Iterate through each book
     for item in items:
         # Use Beautiful Soup's find() method to navigate and retrieve attributes
-        link = item.find('a')
-        href = link['href']
+        # link = item.find('a')
+        # href = link['href']
         titles = item.find('h3').text
-        # print(titles)
-        urls = 'https://astrogeology.usgs.gov' + href
-        # print(urls)
-
-        try:
-            browser.visit(urls)
-
-            html = browser.html
-            soup = BeautifulSoup(html, 'html.parser')
-            soups = soup.find_all('div',class_="content")
-
-            for soup in soups:
-                # Use Beautiful Soup's find() method to navigate and retrieve attributes
-                link = soup.find('a')['href']
-                # print(link)
-                hemisphere_image_urls.append({"title": titles, "img_url": urls,"imglink": link})
-        except:
-            print("Scraping skipped")
-
+        print(titles)
+    #     urls = 'https://astrogeology.usgs.gov' + href
+    #     print(urls)
+        browser.click_link_by_partial_text(titles)
+    #     time.sleep(1)
+        html_subpage = browser.html
+        soup_subpage = BeautifulSoup(html_subpage, 'html.parser')
+        img_url = soup_subpage.find('div', 'downloads').ul.li.a['href']
+        browser.back()
+        hemisphere_image_urls.append({"title": titles, "img_url": img_url})
 
     print(hemisphere_image_urls)
 

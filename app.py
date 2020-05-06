@@ -14,12 +14,13 @@ mongo = PyMongo(app)
 # Route to render index.html template using data from Mongo
 @app.route("/")
 def index():
-
-    mars_headlines = mongo.db.mars_headlines
+    # mars_headlines = mongo.db.mars_headlines
     # Run the scrape function
     mars_headlines_data = scrape_mars.scrape_info()
     mars_tweet = scrape_mars.mars_tweet()
     mars_html = scrape_mars.mars_html()
+    mars_feature_image = scrape_mars.image()
+    mars_hemi = scrape_mars.mars_hemi()
     
     #feature() doesn't work
     # mars_feature_image = scrape_mars.image()
@@ -27,8 +28,9 @@ def index():
     data = {
         "mars_tweet": mars_tweet,
         "mars_headlines_data": mars_headlines_data,
-        # "mars_feature_image": mars_feature_image,
-        "mars_html": mars_html
+        "mars_feature_image": mars_feature_image,
+        "mars_html": mars_html,
+        "mars_hemi": mars_hemi
     }
 
     # # Update the Mongo database using update and upsert=True
